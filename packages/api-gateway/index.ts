@@ -1,0 +1,69 @@
+import express, { Application, Request, Response } from "express";
+import {
+  restaurantFullMenuService,
+  restaurantService,
+  restaurantShortMenuService,
+} from "./service/restaurantService";
+
+const app: Application = express();
+const port = 3001;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get(
+  "/restaurant/:restaurantId",
+  async (
+    req: Request<IRestaurantRequest>,
+    res: Response<IRestaurant | { error: string }>
+  ) => {
+    try {
+      const restaurant = await restaurantService(req.params);
+      res.json(restaurant);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch restaurant data" });
+    }
+  }
+);
+
+app.get(
+  "/shortmenu/:restaurantId/:menuName",
+  async (
+    req: Request<IMenuRequest>,
+    res: Response<IShortMenu | { error: string }>
+  ) => {
+    try {
+      const restaurant: IShortMenu = await restaurantShortMenuService({
+        ...req.params,
+      });
+      res.json(restaurant);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch restaurant data" });
+    }
+  }
+);
+
+app.get(
+  "/fullmenu/:restaurantId/:menuName",
+  async (
+    req: Request<IMenuRequest>,
+    res: Response<IFullMenu | { error: string }>
+  ) => {
+    try {
+      const restaurant: IFullMenu = await restaurantFullMenuService({
+        ...req.params,
+      });
+      res.json(restaurant);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch restaurant data" });
+    }
+  }
+);
+
+try {
+  app.listen(port, (): void => {
+    console.log(`Connected successfully on port ${port}`);
+  });
+} catch (error) {
+  console.error(`Error occured: ${(error as Error).message}`);
+}
