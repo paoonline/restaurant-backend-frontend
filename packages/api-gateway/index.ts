@@ -4,6 +4,8 @@ import {
   restaurantService,
   restaurantShortMenuService,
 } from "./service/restaurantService";
+import { IRestaurant, IShortMenu, IFullMenu } from "./model/restaurant";
+import { IRestaurantRequest, IMenuRequest } from "./model/restaurantRequest";
 
 const app: Application = express();
 const port = 3001;
@@ -19,6 +21,7 @@ app.get(
   ) => {
     try {
       const restaurant = await restaurantService(req.params);
+	    res.set('Cache-Control', 'public, max-age=300');
       res.json(restaurant);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch restaurant data" });
@@ -36,6 +39,7 @@ app.get(
       const restaurant: IShortMenu = await restaurantShortMenuService({
         ...req.params,
       });
+	  res.set('Cache-Control', 'public, max-age=300');
       res.json(restaurant);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch restaurant data" });
@@ -53,6 +57,7 @@ app.get(
       const restaurant: IFullMenu = await restaurantFullMenuService({
         ...req.params,
       });
+	    res.set('Cache-Control', 'public, max-age=300');
       res.json(restaurant);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch restaurant data" });
@@ -67,3 +72,6 @@ try {
 } catch (error) {
   console.error(`Error occured: ${(error as Error).message}`);
 }
+
+
+export { app };

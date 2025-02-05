@@ -1,3 +1,5 @@
+import { IMenuRequest, IRestaurantRequest } from "../model/restaurantRequest";
+
 const PREFIX_API = 'https://us-central1-wongnai-frontend-assignment.cloudfunctions.net/api/restaurants'
 
 export const restaurantService = async ({ restaurantId }: IRestaurantRequest) => {

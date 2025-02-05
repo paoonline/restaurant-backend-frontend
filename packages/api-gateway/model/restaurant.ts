@@ -1,4 +1,4 @@
-interface IRestaurant {
+export interface IRestaurant {
   name: string;
   id: number;
   coverImage: string;
@@ -9,7 +9,7 @@ interface IRestaurant {
   };
 }
 
-interface IShortMenu {
+export interface IShortMenu {
   name: string;
   id: string;
   thumbnailImage?: string;
@@ -23,7 +23,7 @@ interface IShortMenu {
   totalInStock: number;
 }
 
-interface IFullMenu {
+export interface IFullMenu {
   name: string;
   id: string;
   thumbnailImage?: string;

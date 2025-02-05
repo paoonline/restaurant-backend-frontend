@@ -1,8 +1,8 @@
-interface IRestaurantRequest {
+export interface IRestaurantRequest {
     restaurantId: string
 }
 
-interface IMenuRequest {
+export interface IMenuRequest {
     restaurantId: string
     menuName: string
 }
