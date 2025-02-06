@@ -1,8 +1,9 @@
 import { IMenuRequest, IRestaurantRequest } from "../model/restaurantRequest";
+import config from '../../../config.json'
+import { IFullMenu, IRestaurant, IShortMenu } from "../model/restaurant";
+const PREFIX_API = config.PREFIX_API
 
-const PREFIX_API = 'https://us-central1-wongnai-frontend-assignment.cloudfunctions.net/api/restaurants'
-
-export const restaurantService = async ({ restaurantId }: IRestaurantRequest) => {
+export const restaurantService = async ({ restaurantId }: IRestaurantRequest): Promise<IRestaurant> => {
     try {
         const response = await fetch(`${PREFIX_API}/${restaurantId}.json`);
         
@@ -17,7 +18,7 @@ export const restaurantService = async ({ restaurantId }: IRestaurantRequest) =>
     }
 };
 
-export const restaurantShortMenuService = async ({ restaurantId, menuName }: IMenuRequest) => {
+export const restaurantShortMenuService = async ({ restaurantId, menuName }: IMenuRequest): Promise<IShortMenu> => {
     try {
         const response = await fetch(`${PREFIX_API}/${restaurantId}/menus/${menuName}/short.json`);
         
@@ -33,7 +34,7 @@ export const restaurantShortMenuService = async ({ restaurantId, menuName }: IMe
 };
 
 
-export const restaurantFullMenuService = async ({ restaurantId, menuName }: IMenuRequest) => {
+export const restaurantFullMenuService = async ({ restaurantId, menuName }: IMenuRequest): Promise<IFullMenu> => {
     try {
         const response = await fetch(`${PREFIX_API}/${restaurantId}/menus/${menuName}/full.json`);
         

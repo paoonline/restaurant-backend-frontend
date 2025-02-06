@@ -1,0 +1,9 @@
+html, body {
+    height: 100%;
+    margin: 0; /* Optional: Remove default margin */
+    padding: 0; /* Optional: Remove default padding */
+  }
+  
+  #root {
+    height: 100%; /* Ensure the root container takes full height */
+  }

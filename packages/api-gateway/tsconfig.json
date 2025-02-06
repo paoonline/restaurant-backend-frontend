@@ -1,12 +1,13 @@
 {
-	"compilerOptions": {
-		"target": "es6",
-		"module": "commonjs",
-		"strict": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true,
-		"sourceMap": true,
-		"outDir": "dist"
-	}
+  "compilerOptions": {
+    "target": "es6",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "module": "commonjs" // or another module system you're using
+  }
 }
