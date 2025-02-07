@@ -3,6 +3,6 @@ export interface IRestaurantRequest {
 }
 
 export interface IMenuRequest {
-    restaurantId: string
+    restaurantId: number
     menuName: string
 }

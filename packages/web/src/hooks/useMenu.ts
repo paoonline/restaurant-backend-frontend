@@ -8,6 +8,7 @@ const useMenu = () => {
     }
 
     return {
+        IsSelectShopName: !!shopId,
         shopId,
         onSetShopId
     }

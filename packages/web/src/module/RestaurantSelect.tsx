@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import color from "../base/color";
 import styled from "@emotion/styled";
+import { BoxContainer } from "../base/BoxContainer";
 
 const shopData = [
   {
@@ -13,15 +14,19 @@ const shopData = [
   },
 ];
 
-interface ShopProps {
+interface RestaurantSelectProps {
   callback(value: number): void;
 }
 
-const Shop = ({ callback }: ShopProps): JSX.Element => {
+const RestaurantSelect = ({ callback }: RestaurantSelectProps): JSX.Element => {
   return (
     <BoxContainer>
       {shopData.map((res) => (
-        <BoxColor key={res.id} onClick={() => callback(res.id)}>
+        <BoxColor
+          key={res.id}
+          onClick={() => callback(res.id)}
+          borderRadius={2}
+        >
           <TextColor>{res.name}</TextColor>
         </BoxColor>
       ))}
@@ -29,17 +34,8 @@ const Shop = ({ callback }: ShopProps): JSX.Element => {
   );
 };
 
-const BoxContainer = styled(Box)`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  cursor: pointer;
-`;
-
 const BoxColor = styled(Box)`
-  width: 50%;
+  width: 60%;
   height: 200px;
   background-color: ${color.base};
 
@@ -47,11 +43,13 @@ const BoxColor = styled(Box)`
   justify-content: center;
   align-items: center;
   margin-bottom: 24px;
+  cursor: pointer;
 `;
 
 const TextColor = styled(Box)`
-  color: ${color.text};
+  color: ${color.textWhite};
   font-size: 24px;
+  text-align: center;
 `;
 
-export default Shop;
+export default RestaurantSelect;

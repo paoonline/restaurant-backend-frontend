@@ -1,6 +1,8 @@
 const color = {
     base: '#00c856',
-    text: "#ffffff"
+    textWhite: "#ffffff",
+    red: '#f44336'
+    
 }
 
 export default color

@@ -1,10 +1,8 @@
-import { useEffect } from "react";
-import { restaurantService } from "./service/restaurantService";
-import Shop from "./module/shop";
 import "./root.css";
-
 import { createTheme, ThemeProvider } from "@mui/material";
 import useMenu from "./hooks/useMenu";
+import RestaurantSelect from "./module/RestaurantSelect";
+import Restaurant from "./module/Restautant/Restaurant";
 
 const theme = createTheme({
   typography: {
@@ -13,15 +11,12 @@ const theme = createTheme({
 });
 
 function App() {
-  // useEffect(() => {
-  //   restaurantService(567051);
-  // }, []);
-
-  const {shopId, onSetShopId} = useMenu()
+  const { shopId, IsSelectShopName, onSetShopId } = useMenu();
 
   return (
     <ThemeProvider theme={theme}>
-      {!shopId  && <Shop callback={onSetShopId}/>}
+      {!IsSelectShopName && <RestaurantSelect callback={onSetShopId} />}
+      {IsSelectShopName && <Restaurant shopId={shopId || 0} />}
     </ThemeProvider>
   );
 }
