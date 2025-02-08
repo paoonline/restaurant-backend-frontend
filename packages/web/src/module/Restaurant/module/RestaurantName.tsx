@@ -40,7 +40,7 @@ const RestaurantName = ({
 
   return (
     <BoxContainer mt={2}>
-      <Box flexDirection={"row"} display={"flex"} alignItems={"center"}>
+      <Box sx={{flexDirection:{xs:'column', sm:'row'}}} display={"flex"} alignItems={"center"}>
         <TextContainer sx={{ minWidth: { sm: 100 } }}>{name}</TextContainer>
         <Box
           sx={{
