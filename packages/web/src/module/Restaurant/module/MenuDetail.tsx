@@ -115,7 +115,7 @@ const MenuDetail = ({
 
   const stockRender = () => (
     <Box display="flex" flexDirection="row" justifyContent={"space-between"} mt={2}>
-       <Typography variant="body1">{translations.stock}</Typography>
+      <Typography variant="body1">{translations.stock}</Typography>
       <Typography variant="body1">{totalInStock}</Typography>
     </Box>
   );
@@ -130,10 +130,10 @@ const MenuDetail = ({
           justifyContent={"space-between"}
           mt={1}
         >
-          <Typography variant="body1">เลือก{res.label}</Typography>
+          <Typography variant="body1">เลือก {res.label}</Typography>
           <Box display="flex" flexDirection="column">
             {res.choices.map((res, i) => (
-              <Typography key={res.label + i} variant="body1">
+              <Typography key={res.label + i} variant="body1" textAlign='right'>
                 {res.label}
               </Typography>
             ))}
