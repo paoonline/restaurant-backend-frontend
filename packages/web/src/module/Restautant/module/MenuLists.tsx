@@ -1,6 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import { IRestaurant, IShortMenu } from "../../../model/restaurant";
 import { BoxRestaurantContainer } from "../../../base/BoxContainer";
+import Discount from "../../../base/Discount";
+import { translations } from "../../../base/lang";
 
 const MenuLists = ({
   data,
@@ -87,16 +89,14 @@ const MenuLists = ({
                     color="text.secondary"
                     fontSize={16}
                   >
-                    {price} บาท
+                    {price} {translations.baht}
                   </Typography>
                   {hasDiscount ? (
-                    <Typography
-                      variant="subtitle2"
-                      color="warning"
-                      fontSize={16}
-                    >
-                      ส่วนลด {findMenuObject(res)?.discountedPercent} %
-                    </Typography>
+                    <Discount
+                      disCount={`${translations.discount} ${
+                        findMenuObject(res)?.discountedPercent
+                      } %`}
+                    />
                   ) : null}
                 </Box>
               </BoxRestaurantContainer>
@@ -104,7 +104,7 @@ const MenuLists = ({
           })
       ) : (
         <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-          ไม่มีเมนู
+          {translations.no_menu}
         </Typography>
       )}
     </>

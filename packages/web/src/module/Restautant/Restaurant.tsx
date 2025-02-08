@@ -3,7 +3,7 @@ import {
   restaurantService,
   restaurantShortMenuService,
 } from "../../service/restaurantService";
-import { Box, Modal, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { IRestaurant, IShortMenu } from "../../model/restaurant";
 
 import LoadingRender from "../../base/Loading";
@@ -11,18 +11,7 @@ import PaginationModule from "./module/PaginationModule";
 import Banner from "./module/Banner";
 import RestaurantName from "./module/RestaurantName";
 import MenuLists from "./module/MenuLists";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import RestaurantModal from "./module/RestaurantModal";
 
 const Restaurant = ({ shopId }: { shopId: number }) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -104,8 +93,9 @@ const Restaurant = ({ shopId }: { shopId: number }) => {
   };
 
   const handlModal = (open: boolean, id?: string) => {
-    setOpenModal(open)
-  }
+    setOpenModal(open);
+    id && console.log(id)
+  };
 
   useEffect(() => {
     fetchData();
@@ -125,6 +115,7 @@ const Restaurant = ({ shopId }: { shopId: number }) => {
               name={data?.name}
               isClosed={isClosed}
               onSearch={handleOnSearch}
+              onOpenModal={handlModal}
               searchLists={dataSearch}
             />
             <MenuLists
@@ -133,29 +124,7 @@ const Restaurant = ({ shopId }: { shopId: number }) => {
               callback={handlFilterList}
               menuDetailLists={menuDetailLists}
             />
-            {/* // fix */}
-            <Modal
-              keepMounted
-              open={openModal}
-              onClose={() => handlModal(false)}
-              aria-labelledby="keep-mounted-modal-title"
-              aria-describedby="keep-mounted-modal-description"
-            >
-              <Box sx={style}>
-                <Typography
-                  id="keep-mounted-modal-title"
-                  variant="h6"
-                  component="h2"
-                >
-                  Text in a modal
-                </Typography>
-                <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-                  Duis mollis, est non commodo luctus, nisi erat porttitor
-                  ligula.
-                </Typography>
-              </Box>
-            </Modal>
-            {/* // */}
+            <RestaurantModal open={openModal} onOpen={handlModal}/>
 
             <PaginationModule
               callback={handlePageChange}

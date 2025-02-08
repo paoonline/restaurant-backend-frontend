@@ -1,9 +1,9 @@
 import { useState } from "react"
 
 const useMenu = () => {
-    const [shopId, setShopId] = useState<number>()
+    const [shopId, setShopId] = useState<number | null>()
 
-    const onSetShopId = (shopId: number) => {
+    const onSetShopId = (shopId: number | null) => {
         setShopId(shopId)
     }
 

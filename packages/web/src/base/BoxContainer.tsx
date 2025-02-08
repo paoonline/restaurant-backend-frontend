@@ -11,5 +11,5 @@ export const BoxContainer = styled(Box)`
 export const BoxRestaurantContainer = styled(Box)`
   display: flex;
   height: 100%;
-  padding-left: 100px;
+  padding-left: 20%;
 `;

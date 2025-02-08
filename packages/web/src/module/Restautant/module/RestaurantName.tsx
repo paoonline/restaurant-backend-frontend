@@ -5,22 +5,28 @@ import {
   ListItemText,
   Paper,
   TextField,
+  Typography,
   styled,
 } from "@mui/material";
 import color from "../../../base/color";
 import { useState } from "react";
+import { useAppContext } from "../../../App";
+import { translations } from "../../../base/lang";
 
 const RestaurantName = ({
   name,
   isClosed,
   searchLists,
   onSearch,
+  onOpenModal,
 }: {
   searchLists: string[];
   name: string;
   onSearch: (searchValue: string) => void;
+  onOpenModal: (open: boolean, id: string) => void;
   isClosed: boolean;
 }) => {
+  const {onSetShopId} = useAppContext()
   const [searchValue, setSearchValue] = useState("");
   const handleOnSearch = (searchValue: string) => {
     setSearchValue(searchValue);
@@ -29,6 +35,7 @@ const RestaurantName = ({
 
   const handleClickList = (menu: string) => {
     handleOnSearch(menu);
+    onOpenModal(true, menu);
   };
 
   return (
@@ -43,15 +50,24 @@ const RestaurantName = ({
           borderRadius={1}
         >
           <TextStatusContainer isClosed={isClosed}>
-            {isClosed ? "ปิด" : "เปิด"}
+            {isClosed ? translations.close : translations.open }
           </TextStatusContainer>
         </Box>
       </Box>
 
-      <Box ml={5}>
+      <Box
+        ml={5}
+        pr={1}
+        display={"flex"}
+        width={"100%"}
+        justifyContent={"space-between"}
+        sx={{
+          flexDirection: { xs: 'column', sm: 'row' }, 
+        }}
+      >
         <TextField
           id="outlined-basic"
-          label="ค้นหาร้านอาหาร"
+          label={translations.search_restaurant}
           variant="outlined"
           type="search"
           value={searchValue}
@@ -59,6 +75,12 @@ const RestaurantName = ({
             handleOnSearch(e.target.value);
           }}
         />
+
+        <Box sx={{cursor:'pointer'}} onClick={() => onSetShopId(null)}>
+          <Typography variant="subtitle1" color="info" fontSize={18}>
+            {translations.back_to_main}
+          </Typography>
+        </Box>
 
         {searchValue && (
           <Paper
@@ -84,7 +106,7 @@ const RestaurantName = ({
                 ))
               ) : (
                 <ListItem>
-                  <ListItemText primary="No results found" />
+                  <ListItemText primary={translations.seach_not_found} />
                 </ListItem>
               )}
             </List>
@@ -103,7 +125,7 @@ const TextContainer = styled("div")`
 const BoxContainer = styled(Box)`
   display: flex;
   height: 100%;
-  padding-left: 100px;
+  padding-left: 20%;
   flex-direction: row;
   align-items: center;
 `;
