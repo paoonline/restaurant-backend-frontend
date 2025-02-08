@@ -12,7 +12,7 @@ jest.mock("../service/restaurantService", () => ({
 }));
 
 const restaurantMock = {
-  name: "LINE MAN Wongnai Restaurant",
+  name: "Restaurant",
   id: "1",
   coverImage: "",
   menus: ["a"],
