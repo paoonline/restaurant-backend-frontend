@@ -5,6 +5,7 @@ import Discount from "../../../base/Discount";
 import { translations } from "../../../base/lang";
 import isTimeDiscount from "../hooks/useTimeDiscount";
 import usePrice from "../hooks/usePrice";
+import MenuImage from "../../../base/MenuImage";
 
 const MenuLists = ({
   data,
@@ -17,7 +18,6 @@ const MenuLists = ({
   onOpenModal: (open: boolean, id: string) => void;
   menuDetailLists: IShortMenu[];
 }) => {
-
   const findMenuObject = (menuName: string) =>
     menuDetailLists?.find((result) => result.id === menuName);
 
@@ -36,7 +36,10 @@ const MenuLists = ({
             } = findMenuObject(res) || {};
             const pricePrimary = fullPrice || 0;
 
-            const price = usePrice({discountedPercent: discountedPercent || 0, price: pricePrimary})
+            const price = usePrice({
+              discountedPercent: discountedPercent || 0,
+              price: pricePrimary,
+            });
 
             const hasDiscount =
               discountedPercent &&
@@ -58,18 +61,7 @@ const MenuLists = ({
                 }}
                 onClick={() => onOpenModal(true, id as unknown as string)}
               >
-                <Box
-                  data-testid={"image" + i}
-                  sx={{
-                    height: 90,
-                    width: 90,
-                    backgroundImage: `url(${thumbnailImage})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                  }}
-                  borderRadius={2}
-                />
+                <MenuImage thumbnailImage={thumbnailImage} />
                 <Box ml={2} display="flex" flexDirection="column" mt={-3}>
                   <Typography
                     variant="subtitle1"
