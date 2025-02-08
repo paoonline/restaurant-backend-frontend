@@ -6,5 +6,7 @@ export const translations = {
   close: "ปิด",
   search_restaurant: "ค้นหาร้านอาหาร",
   seach_not_found : "No results found",
-  discount: 'ส่วนสด'
+  discount: 'ส่วนลด',
+  price: 'ราคา',
+  stock: 'จำนวนคงเหลือ'
 };

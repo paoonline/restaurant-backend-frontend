@@ -26,7 +26,7 @@ const RestaurantName = ({
   onOpenModal: (open: boolean, id: string) => void;
   isClosed: boolean;
 }) => {
-  const {onSetShopId} = useAppContext()
+  const { onSetRestaurantId } = useAppContext();
   const [searchValue, setSearchValue] = useState("");
   const handleOnSearch = (searchValue: string) => {
     setSearchValue(searchValue);
@@ -41,7 +41,7 @@ const RestaurantName = ({
   return (
     <BoxContainer mt={2}>
       <Box flexDirection={"row"} display={"flex"} alignItems={"center"}>
-        <TextContainer>{name}</TextContainer>
+        <TextContainer sx={{ minWidth: { sm: 100 } }}>{name}</TextContainer>
         <Box
           sx={{
             backgroundColor: isClosed ? color.red : color.base,
@@ -50,7 +50,7 @@ const RestaurantName = ({
           borderRadius={1}
         >
           <TextStatusContainer isClosed={isClosed}>
-            {isClosed ? translations.close : translations.open }
+            {isClosed ? translations.close : translations.open}
           </TextStatusContainer>
         </Box>
       </Box>
@@ -62,7 +62,7 @@ const RestaurantName = ({
         width={"100%"}
         justifyContent={"space-between"}
         sx={{
-          flexDirection: { xs: 'column', sm: 'row' }, 
+          flexDirection: { xs: "column", sm: "row" },
         }}
       >
         <TextField
@@ -76,7 +76,7 @@ const RestaurantName = ({
           }}
         />
 
-        <Box sx={{cursor:'pointer'}} onClick={() => onSetShopId(null)}>
+        <Box sx={{ cursor: "pointer", paddingRight: {md:'20%'} }} onClick={() => onSetRestaurantId(null)}>
           <Typography variant="subtitle1" color="info" fontSize={18}>
             {translations.back_to_main}
           </Typography>
@@ -88,7 +88,7 @@ const RestaurantName = ({
             sx={{
               maxHeight: 200,
               overflow: "auto",
-              mt: 1,
+              mt: 7,
               position: "absolute",
             }}
           >
@@ -98,7 +98,7 @@ const RestaurantName = ({
                   // @ts-ignore
                   <ListItem
                     button
-                    key={index}
+                    key={menu + index}
                     onClick={() => handleClickList(menu)}
                   >
                     <ListItemText primary={menu} />
@@ -120,6 +120,7 @@ const RestaurantName = ({
 const TextContainer = styled("div")`
   font-size: 24px;
   padding-right: 10px;
+  text-align: center;
 `;
 
 const BoxContainer = styled(Box)`

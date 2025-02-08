@@ -3,6 +3,8 @@ import { IRestaurant, IShortMenu } from "../../../model/restaurant";
 import { BoxRestaurantContainer } from "../../../base/BoxContainer";
 import Discount from "../../../base/Discount";
 import { translations } from "../../../base/lang";
+import isTimeDiscount from "../hooks/useTimeDiscount";
+import usePrice from "../hooks/usePrice";
 
 const MenuLists = ({
   data,
@@ -15,14 +17,6 @@ const MenuLists = ({
   onOpenModal: (open: boolean, id: string) => void;
   menuDetailLists: IShortMenu[];
 }) => {
-  const inTimeDiscount = ({ begin, end }: { begin: string; end: string }) => {
-    if (!begin) return false;
-    const now = new Date();
-    const currentTime = now.getHours() + now.getMinutes() / 60;
-    const openTime = begin ? parseFloat(begin) : 0;
-    const closeTime = end ? parseFloat(end) : 24;
-    return currentTime >= openTime && currentTime <= closeTime;
-  };
 
   const findMenuObject = (menuName: string) =>
     menuDetailLists?.find((result) => result.id === menuName);
@@ -42,14 +36,12 @@ const MenuLists = ({
             } = findMenuObject(res) || {};
             const pricePrimary = fullPrice || 0;
 
-            const price = discountedPercent
-              ? pricePrimary - (pricePrimary * discountedPercent) / 100
-              : pricePrimary;
+            const price = usePrice({discountedPercent: discountedPercent || 0, price: pricePrimary})
 
             const hasDiscount =
               discountedPercent &&
               discountedTimePeriod &&
-              inTimeDiscount({
+              isTimeDiscount({
                 begin: discountedTimePeriod?.begin || "",
                 end: discountedTimePeriod?.end || "",
               });
@@ -57,7 +49,7 @@ const MenuLists = ({
             return (
               <BoxRestaurantContainer
                 mt={4}
-                key={i}
+                key={res + i}
                 display="flex"
                 alignItems="center"
                 sx={{

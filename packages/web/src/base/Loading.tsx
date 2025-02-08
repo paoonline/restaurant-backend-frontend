@@ -19,7 +19,7 @@ const LoadingContainer = styled(Box)`
   right: 0;
   bottom: 0;
   background: rgba(255, 255, 255, 0.6);
-  z-index: 1000;
+  z-index: 99999999;
 `;
 
 export default LoadingRender;

@@ -11,40 +11,30 @@ import PaginationModule from "./module/PaginationModule";
 import Banner from "./module/Banner";
 import RestaurantName from "./module/RestaurantName";
 import MenuLists from "./module/MenuLists";
-import RestaurantModal from "./module/RestaurantModal";
+import { useAppContext } from "../../App";
+import MenuDetail from "./module/MenuDetail";
+import { translations } from "../../base/lang";
 
-const Restaurant = ({ shopId }: { shopId: number }) => {
-  const [loading, setLoading] = useState<boolean>(false);
+const Restaurant = () => {
   const [data, setData] = useState<IRestaurant>();
   const [dataSearch, setDataSearch] = useState<string[]>([]);
   const [menuDetailLists, setMenuDetailLists] = useState<IShortMenu[]>([]);
   const [page, setPage] = useState<number>(0);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [menuName, setMenuName] = useState<string>("");
+  const [isError, setError] = useState<boolean>(false)
 
-  const isClosed = useMemo(() => {
-    const now = new Date();
-    const currentTime = now.getHours() + now.getMinutes() / 60;
-
-    const closeTime = data?.activeTimePeriod?.close
-      ? parseFloat(data.activeTimePeriod.close)
-      : 0;
-
-    const openTime = data?.activeTimePeriod?.open
-      ? parseFloat(data.activeTimePeriod.open)
-      : 0;
-
-    return currentTime >= closeTime || currentTime <= openTime;
-  }, [data?.activeTimePeriod.close, data?.activeTimePeriod.open]);
+  const { restaurantId, setLoading, loading } = useAppContext();
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      const result = await restaurantService(shopId);
+      const result = await restaurantService(restaurantId);
       setData(result);
       handleMenuDetail(result);
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      setError(true)
     }
   };
 
@@ -58,7 +48,7 @@ const Restaurant = ({ shopId }: { shopId: number }) => {
           .filter((_, i) => handlFilterList(i))
           .map(async (element) => {
             return await restaurantShortMenuService({
-              restaurantId: shopId,
+              restaurantId,
               menuName: element,
             });
           })
@@ -92,10 +82,30 @@ const Restaurant = ({ shopId }: { shopId: number }) => {
     setDataSearch(filterSearch);
   };
 
-  const handlModal = (open: boolean, id?: string) => {
+  const handlModalCallback = (open: boolean, id: string) => {
     setOpenModal(open);
-    id && console.log(id)
+    setMenuName(id);
   };
+
+  const onClosedModal = (open: boolean) => {
+    setOpenModal(open);
+    setMenuName("");
+  };
+
+  const isClosed = useMemo(() => {
+    const now = new Date();
+    const currentTime = now.getHours() + now.getMinutes() / 60;
+
+    const closeTime = data?.activeTimePeriod?.close
+      ? parseFloat(data.activeTimePeriod.close)
+      : 0;
+
+    const openTime = data?.activeTimePeriod?.open
+      ? parseFloat(data.activeTimePeriod.open)
+      : 0;
+
+    return currentTime >= closeTime || currentTime <= openTime;
+  }, [data?.activeTimePeriod.close, data?.activeTimePeriod.open]);
 
   useEffect(() => {
     fetchData();
@@ -108,31 +118,33 @@ const Restaurant = ({ shopId }: { shopId: number }) => {
   return (
     <Box>
       <>
-        {!!data && (
+        {data ? (
           <>
             <Banner url={data?.coverImage} />
             <RestaurantName
               name={data?.name}
               isClosed={isClosed}
               onSearch={handleOnSearch}
-              onOpenModal={handlModal}
+              onOpenModal={handlModalCallback}
               searchLists={dataSearch}
             />
             <MenuLists
-              onOpenModal={handlModal}
+              onOpenModal={handlModalCallback}
               data={data}
               callback={handlFilterList}
               menuDetailLists={menuDetailLists}
             />
-            <RestaurantModal open={openModal} onOpen={handlModal}/>
-
+            {openModal && <MenuDetail
+              open={openModal}
+              menuName={menuName}
+              onClosed={onClosedModal}
+            />}
             <PaginationModule
               callback={handlePageChange}
               totalPage={Math.floor(data?.menus.length / 10)}
             />
           </>
-        )}
-
+        ) : isError && <p>{translations.seach_not_found}</p>}
         {loading && <LoadingRender />}
       </>
     </Box>

@@ -1,16 +1,16 @@
 import { useState } from "react"
 
 const useMenu = () => {
-    const [shopId, setShopId] = useState<number | null>()
+    const [restaurantId, setRestaurantId] = useState<number | null>()
 
-    const onSetShopId = (shopId: number | null) => {
-        setShopId(shopId)
+    const onSetRestaurantId = (id: number | null) => {
+        setRestaurantId(id)
     }
 
     return {
-        IsSelectShopName: !!shopId,
-        shopId,
-        onSetShopId
+        IsSelectShopName: !!restaurantId,
+        restaurantId,
+        onSetRestaurantId
     }
 }
 
