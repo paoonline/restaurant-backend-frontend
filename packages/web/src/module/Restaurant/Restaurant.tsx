@@ -66,12 +66,11 @@ const Restaurant = () => {
   };
 
   const handlFilterList = (index: number) => {
-    const startPage = page * 10;
-    const endPage = page * 10 + 10;
-
     if (page === 0) {
       return index < 10;
     }
+    const startPage = (page - 1) * 10;
+    const endPage = (page - 1) * 10 + 10;
     return index >= startPage && index < endPage;
   };
 
