@@ -159,7 +159,7 @@ const MenuDetail = ({
       aria-labelledby="keep-mounted-modal-title"
       aria-describedby="keep-mounted-modal-description"
     >
-      <Box sx={style}>
+      <Box sx={{ ...style, maxHeight: '80vh', overflowY: 'auto' }}>
         {data ? (
           <Box>
             <TitleSection />
