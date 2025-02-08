@@ -2,8 +2,15 @@ import { Box } from "@mui/material";
 
 const defaultImage = "/assets/DefaultImage.png";
 
-const MenuImage = ({ thumbnailImage }: { thumbnailImage?: string }) => (
+const MenuImage = ({
+  thumbnailImage,
+  dataTestid,
+}: {
+  thumbnailImage?: string;
+  dataTestid: string;
+}) => (
   <Box
+    data-testid={dataTestid}
     sx={{
       height: 90,
       width: 90,

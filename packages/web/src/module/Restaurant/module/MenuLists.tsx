@@ -61,7 +61,7 @@ const MenuLists = ({
                 }}
                 onClick={() => onOpenModal(true, id as unknown as string)}
               >
-                <MenuImage thumbnailImage={thumbnailImage} />
+                <MenuImage thumbnailImage={thumbnailImage} dataTestid={"image" + i}/>
                 <Box ml={2} display="flex" flexDirection="column" mt={-3}>
                   <Typography
                     variant="subtitle1"
