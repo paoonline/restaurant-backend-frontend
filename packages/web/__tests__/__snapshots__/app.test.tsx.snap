@@ -6,22 +6,24 @@ exports[`App should render correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="MuiBox-root css-15z375g"
+        class="MuiBox-root css-1mqgxb4"
       >
         <div
-          class="MuiBox-root css-18jocpe"
+          class="MuiBox-root css-1m898jw"
+          data-testid="567051_select"
         >
           <div
-            class="MuiBox-root css-1uzu2t1"
+            class="MuiBox-root css-16mxtwq"
           >
             ร้านลืมเคี้ยว
           </div>
         </div>
         <div
-          class="MuiBox-root css-18jocpe"
+          class="MuiBox-root css-1m898jw"
+          data-testid="227018_select"
         >
           <div
-            class="MuiBox-root css-1uzu2t1"
+            class="MuiBox-root css-16mxtwq"
           >
             Ekkamai Macchiato - Home Brewer
           </div>
@@ -31,22 +33,24 @@ exports[`App should render correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="MuiBox-root css-15z375g"
+      class="MuiBox-root css-1mqgxb4"
     >
       <div
-        class="MuiBox-root css-18jocpe"
+        class="MuiBox-root css-1m898jw"
+        data-testid="567051_select"
       >
         <div
-          class="MuiBox-root css-1uzu2t1"
+          class="MuiBox-root css-16mxtwq"
         >
           ร้านลืมเคี้ยว
         </div>
       </div>
       <div
-        class="MuiBox-root css-18jocpe"
+        class="MuiBox-root css-1m898jw"
+        data-testid="227018_select"
       >
         <div
-          class="MuiBox-root css-1uzu2t1"
+          class="MuiBox-root css-16mxtwq"
         >
           Ekkamai Macchiato - Home Brewer
         </div>

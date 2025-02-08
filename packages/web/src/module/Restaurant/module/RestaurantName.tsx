@@ -66,6 +66,7 @@ const RestaurantName = ({
         }}
       >
         <TextField
+          data-testid="restaurant-search"
           id="outlined-basic"
           label={translations.search_restaurant}
           variant="outlined"

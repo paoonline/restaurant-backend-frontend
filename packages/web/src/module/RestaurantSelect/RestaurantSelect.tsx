@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import color from "../base/color";
+import color from "../../base/color";
 import styled from "@emotion/styled";
-import { BoxContainer } from "../base/BoxContainer";
+import { BoxContainer } from "../../base/BoxContainer";
 
 const shopData = [
   {
@@ -24,6 +24,7 @@ const RestaurantSelect = ({ callback }: RestaurantSelectProps): JSX.Element => {
       {shopData.map((res) => (
         <BoxColor
           key={res.id}
+          data-testid={res.id + '_select'}
           onClick={() => callback(res.id)}
           borderRadius={2}
         >

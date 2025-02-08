@@ -35,6 +35,8 @@ const Restaurant = () => {
     } catch (error) {
       setLoading(false);
       setError(true)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,7 +46,7 @@ const Restaurant = () => {
     }
     try {
       const results = await Promise.all(
-        data.menus
+        data?.menus
           .filter((_, i) => handlFilterList(i))
           .map(async (element) => {
             return await restaurantShortMenuService({
@@ -53,9 +55,12 @@ const Restaurant = () => {
             });
           })
       );
+
       setMenuDetailLists(results);
       setLoading(false);
     } catch (error) {
+      setLoading(false);
+    } finally {
       setLoading(false);
     }
   };
@@ -116,7 +121,7 @@ const Restaurant = () => {
   }, [page]);
 
   return (
-    <Box>
+    <Box data-testid="restautant">
       <>
         {data ? (
           <>
@@ -144,7 +149,7 @@ const Restaurant = () => {
               totalPage={Math.floor(data?.menus.length / 10)}
             />
           </>
-        ) : isError && <p>{translations.seach_not_found}</p>}
+        ) : isError && <p data-testid="error_not_found">{translations.seach_not_found}</p>}
         {loading && <LoadingRender />}
       </>
     </Box>

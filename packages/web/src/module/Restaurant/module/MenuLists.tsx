@@ -48,6 +48,7 @@ const MenuLists = ({
 
             return (
               <BoxRestaurantContainer
+                data-testid={"menu-" + i}
                 mt={4}
                 key={res + i}
                 display="flex"
@@ -58,6 +59,7 @@ const MenuLists = ({
                 onClick={() => onOpenModal(true, id as unknown as string)}
               >
                 <Box
+                  data-testid={"image" + i}
                   sx={{
                     height: 90,
                     width: 90,

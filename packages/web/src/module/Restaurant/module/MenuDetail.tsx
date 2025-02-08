@@ -44,10 +44,13 @@ const MenuDetail = ({
         restaurantId,
         menuName,
       });
+
       setData(result);
       setLoading(false);
     } catch (error) {
       setError(true);
+      setLoading(false);
+    } finally {
       setLoading(false);
     }
   };
@@ -76,6 +79,7 @@ const MenuDetail = ({
 
   const TitleSection = () => (
     <Box
+ 
       display="flex"
       flexDirection="row"
       justifyContent="space-between"
@@ -84,7 +88,7 @@ const MenuDetail = ({
       <Box flex={1} display="flex" justifyContent="center" p={2}>
         <Typography variant="h5">{menuName}</Typography>
       </Box>
-      <IconButton onClick={() => onClosed(false)}>
+      <IconButton onClick={() => onClosed(false)} data-testid="menu-detail-modal-closed">
         <CloseIcon />
       </IconButton>
     </Box>
@@ -146,6 +150,7 @@ const MenuDetail = ({
   }, [menuName]);
   return (
     <Modal
+      data-testid="menu-detail-modal"
       keepMounted
       open={open}
       disableAutoFocus

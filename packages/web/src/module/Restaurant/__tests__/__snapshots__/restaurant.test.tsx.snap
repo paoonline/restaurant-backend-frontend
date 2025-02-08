@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Restaurant should display detail modal correctly 1`] = `
+<div
+  aria-describedby="keep-mounted-modal-description"
+  aria-labelledby="keep-mounted-modal-title"
+  class="MuiModal-root css-1g04pbp-MuiModal-root"
+  data-testid="menu-detail-modal"
+  role="presentation"
+>
+  <div
+    aria-hidden="true"
+    class="MuiBackdrop-root MuiModal-backdrop css-4nmryk-MuiBackdrop-root-MuiModal-backdrop"
+    style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+  />
+  <div
+    data-testid="sentinelStart"
+    tabindex="0"
+  />
+  <div
+    class="MuiBox-root css-fcb265"
+    tabindex="-1"
+  >
+    <h2
+      class="MuiTypography-root MuiTypography-h6 css-1miy0lu-MuiTypography-root"
+      id="keep-mounted-modal-title"
+    >
+      No results found
+    </h2>
+  </div>
+  <div
+    data-testid="sentinelEnd"
+    tabindex="0"
+  />
+</div>
+`;

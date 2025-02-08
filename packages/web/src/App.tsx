@@ -1,8 +1,8 @@
 import "./root.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import useMenu from "./hooks/useMenu";
-import RestaurantSelect from "./module/RestaurantSelect";
-import Restaurant from "./module/Restautant/Restaurant";
+import RestaurantSelect from "./module/RestaurantSelect/RestaurantSelect";
+import Restaurant from "./module/Restaurant/Restaurant";
 import { createContext, useContext, useState } from "react";
 
 const theme = createTheme({
