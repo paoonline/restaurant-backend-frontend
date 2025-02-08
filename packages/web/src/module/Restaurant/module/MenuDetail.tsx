@@ -1,4 +1,4 @@
-import { Box, IconButton, Modal, Typography } from "@mui/material";
+import { Box, Checkbox, IconButton, Modal, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { restaurantFullMenuService } from "../../../service/restaurantService";
 import { useAppContext } from "../../../App";
@@ -79,7 +79,6 @@ const MenuDetail = ({
 
   const TitleSection = () => (
     <Box
- 
       display="flex"
       flexDirection="row"
       justifyContent="space-between"
@@ -88,7 +87,10 @@ const MenuDetail = ({
       <Box flex={1} display="flex" justifyContent="center" p={2}>
         <Typography variant="h5">{menuName}</Typography>
       </Box>
-      <IconButton onClick={() => onClosed(false)} data-testid="menu-detail-modal-closed">
+      <IconButton
+        onClick={() => onClosed(false)}
+        data-testid="menu-detail-modal-closed"
+      >
         <CloseIcon />
       </IconButton>
     </Box>
@@ -114,7 +116,12 @@ const MenuDetail = ({
   );
 
   const stockRender = () => (
-    <Box display="flex" flexDirection="row" justifyContent={"space-between"} mt={2}>
+    <Box
+      display="flex"
+      flexDirection="row"
+      justifyContent={"space-between"}
+      mt={2}
+    >
       <Typography variant="body1">{translations.stock}</Typography>
       <Typography variant="body1">{totalInStock}</Typography>
     </Box>
@@ -133,9 +140,21 @@ const MenuDetail = ({
           <Typography variant="body1">{res.label}</Typography>
           <Box display="flex" flexDirection="column">
             {res.choices.map((res, i) => (
-              <Typography key={res.label + i} variant="body1" textAlign='right'>
-                {res.label}
-              </Typography>
+              <Box
+                key={res.label + i}
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="flex-end"
+              >
+                <Typography
+                  variant="body1"
+                  textAlign="right"
+                >
+                  {res.label}
+                </Typography>
+                <Checkbox />
+              </Box>
             ))}
           </Box>
         </Box>
@@ -159,7 +178,7 @@ const MenuDetail = ({
       aria-labelledby="keep-mounted-modal-title"
       aria-describedby="keep-mounted-modal-description"
     >
-      <Box sx={{ ...style, maxHeight: '80vh', overflowY: 'auto' }}>
+      <Box sx={{ ...style, maxHeight: "80vh", overflowY: "auto" }}>
         {data ? (
           <Box>
             <TitleSection />
