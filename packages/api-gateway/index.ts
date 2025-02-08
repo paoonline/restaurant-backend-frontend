@@ -67,12 +67,14 @@ app.get(
   }
 );
 
-try {
-  app.listen(port, (): void => {
-    console.log(`Connected successfully on port ${port}`);
-  });
-} catch (error) {
-  console.error(`Error occured: ${(error as Error).message}`);
+if (process.env.NODE_ENV !== 'test') {
+  try {
+    app.listen(port, (): void => {
+      console.log(`Connected successfully on port ${port}`);
+    });
+  } catch (error) {
+    console.error(`Error occurred: ${(error as Error).message}`);
+  }
 }
 
 
